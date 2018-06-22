@@ -10,8 +10,31 @@ namespace fivem_frontend
 {
     public enum FrontendType
     {
+        FE_MENU_VERSION_SP_PAUSE,
+        FE_MENU_VERSION_MP_PAUSE,
+        FE_MENU_VERSION_CREATOR_PAUSE,
+        FE_MENU_VERSION_CUTSCENE_PAUSE,
+        FE_MENU_VERSION_SAVEGAME,
+        FE_MENU_VERSION_PRE_LOBBY,
+        FE_MENU_VERSION_LOBBY,
+        FE_MENU_VERSION_MP_CHARACTER_SELECT,
+        FE_MENU_VERSION_MP_CHARACTER_CREATION,
+        FE_MENU_VERSION_EMPTY,
+        FE_MENU_VERSION_EMPTY_NO_BACKGROUND,
+        FE_MENU_VERSION_TEXT_SELECTION,
         FE_MENU_VERSION_CORONA,
-        FE_MENU_VERSION_CORONA_RACE
+        FE_MENU_VERSION_CORONA_LOBBY,
+        FE_MENU_VERSION_CORONA_JOINED_PLAYERS,
+        FE_MENU_VERSION_CORONA_INVITE_PLAYERS,
+        FE_MENU_VERSION_CORONA_INVITE_FRIENDS,
+        FE_MENU_VERSION_CORONA_INVITE_CREWS,
+        FE_MENU_VERSION_CORONA_INVITE_MATCHED_PLAYERS,
+        FE_MENU_VERSION_CORONA_INVITE_LAST_JOB_PLAYERS,
+        FE_MENU_VERSION_CORONA_RACE,
+        FE_MENU_VERSION_CORONA_BETTING,
+        FE_MENU_VERSION_JOINING_SCREEN,
+        FE_MENU_VERSION_LANDING_MENU,
+        FE_MENU_VERSION_LANDING_KEYMAPPING_MENU,
     };
 
     public enum PlayerIcon
@@ -165,7 +188,7 @@ namespace fivem_frontend
             }
             playerRows.Add(new PlayerRow(index: playerRows.Count, rank: rank, player: player, status: status, crewTag: crewTag, icon: icon, rowColor: rowColor, statusColor: statusColor));
             //await BaseScript.Delay(100);
-            UpdateList();
+            await UpdateList();
         }
 
         public async void UpdatePlayer(int index, int rank, string status, string crewTag, PlayerIcon icon, HudColor rowColor, HudColor statusColor)
@@ -177,7 +200,7 @@ namespace fivem_frontend
             p.Icon = icon;
             p.RowColor = rowColor;
             p.StatusColor = statusColor;
-            UpdateList();
+            await UpdateList();
         }
 
         public async void UpdatePlayer(Player player, int rank, string status, string crewTag, PlayerIcon icon, HudColor rowColor, HudColor statusColor)
@@ -189,7 +212,7 @@ namespace fivem_frontend
             p.Icon = icon;
             p.RowColor = rowColor;
             p.StatusColor = statusColor;
-            UpdateList();
+            await UpdateList();
         }
 
         public async void DeletePlayer(int index)
@@ -256,6 +279,10 @@ namespace fivem_frontend
 
                 }
             }
+            else
+            {
+                await BaseScript.Delay(0);
+            }
             //await BaseScript.Delay(500);
 
             //UpdateDetails();
@@ -282,7 +309,6 @@ namespace fivem_frontend
             //PopScaleformMovieFunctionVoid();
 
 
-
         }
 
         public async Task ToggleMenu()
@@ -296,16 +322,18 @@ namespace fivem_frontend
                     await BaseScript.Delay(0);
                 }
 
-                RestartFrontendMenu(menuType == FrontendType.FE_MENU_VERSION_CORONA ? (uint)GetHashKey("FE_MENU_VERSION_CORONA") : (uint)GetHashKey("FE_MENU_VERSION_CORONA_RACE"), -1);
+                //RestartFrontendMenu(menuType == FrontendType.FE_MENU_VERSION_CORONA ? (uint)GetHashKey("FE_MENU_VERSION_CORONA") : (uint)GetHashKey("FE_MENU_VERSION_CORONA_RACE"), -1);
+                RestartFrontendMenu((uint)GetHashKey(menuType.ToString()), -1);
 
-                AddFrontendMenuContext((uint)GetHashKey("FM_TUTORIAL"));
-                AddFrontendMenuContext((uint)GetHashKey("AUTOFILL_CORONA"));
-                AddFrontendMenuContext((uint)GetHashKey("CORONA_TOURNAMENT"));
-                AddFrontendMenuContext((uint)GetHashKey("AUTOFILL_CONTINUE"));
-                AddFrontendMenuContext(2010410515);
-                ObjectDecalToggle((uint)Int64.Parse("-228602367"));
+                //AddFrontendMenuContext((uint)GetHashKey("FM_TUTORIAL"));
+                //AddFrontendMenuContext((uint)GetHashKey("AUTOFILL_CORONA"));
+                //AddFrontendMenuContext((uint)GetHashKey("CORONA_TOURNAMENT"));
+                //AddFrontendMenuContext((uint)GetHashKey("AUTOFILL_CONTINUE"));
+                //AddFrontendMenuContext(2010410515);
+                //ObjectDecalToggle((uint)Int64.Parse("-228602367"));
 
-                ActivateFrontendMenu(menuType == FrontendType.FE_MENU_VERSION_CORONA ? (uint)GetHashKey("FE_MENU_VERSION_CORONA") : (uint)GetHashKey("FE_MENU_VERSION_CORONA_RACE"), false, -1);
+                //ActivateFrontendMenu(menuType == FrontendType.FE_MENU_VERSION_CORONA ? (uint)GetHashKey("FE_MENU_VERSION_CORONA") : (uint)GetHashKey("FE_MENU_VERSION_CORONA_RACE"), false, -1);
+                ActivateFrontendMenu((uint)GetHashKey(menuType.ToString()), false, -1);
 
                 // start a call
                 while (!IsPauseMenuActive() || IsPauseMenuRestarting())
@@ -313,10 +341,10 @@ namespace fivem_frontend
                     await BaseScript.Delay(0);
                 }
 
-                AddFrontendMenuContext((uint)GetHashKey("FM_TUTORIAL"));
-                AddFrontendMenuContext((uint)GetHashKey("AUTOFILL_CORONA"));
-                AddFrontendMenuContext((uint)GetHashKey("CORONA_TOURNAMENT"));
-                AddFrontendMenuContext((uint)GetHashKey("AUTOFILL_CONTINUE"));
+                //AddFrontendMenuContext((uint)GetHashKey("FM_TUTORIAL"));
+                //AddFrontendMenuContext((uint)GetHashKey("AUTOFILL_CORONA"));
+                //AddFrontendMenuContext((uint)GetHashKey("CORONA_TOURNAMENT"));
+                //AddFrontendMenuContext((uint)GetHashKey("AUTOFILL_CONTINUE"));
 
 
                 N_0xb9449845f73f5e9c("SHIFT_CORONA_DESC");       // start call function - BeginScaleformMovieMethodV

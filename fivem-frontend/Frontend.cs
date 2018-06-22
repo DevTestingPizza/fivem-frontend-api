@@ -232,7 +232,8 @@ namespace fivem_frontend
         List<FrontendMenu> menus = new List<FrontendMenu>();
         public Frontend()
         {
-            menus.Add(new FrontendMenu("Some Name", "Some Subtitle Here", FrontendType.FE_MENU_VERSION_CORONA));
+            menus.Add(new FrontendMenu("Some Name", "Some Subtitle Here", FrontendType.FE_MENU_VERSION_CREATOR_PAUSE));
+            //menus.Add(new FrontendMenu("Some Name", "Some Subtitle Here", FrontendType.FE_MENU_VERSION_SP_PAUSE));
             RegisterCommand("frontend", new Action<int, List<object>, string>(HandleCommand), false);
             Tick += Loop;
             SetFrontendActive(false);
@@ -248,11 +249,11 @@ namespace fivem_frontend
                 }
                 else if (arguments[0].ToString() == "remove" && ((arguments[1].ToString() ?? "") == "player"))
                 {
-                    if(menus[0].GetNumPlayerRows() > 0)
+                    if (menus[0].GetNumPlayerRows() > 0)
                     {
                         menus[0].DeletePlayer(menus[0].GetNumPlayerRows() - 1);
                     }
-                    
+
                 }
             }
             //menus[0].ToggleMenu();
